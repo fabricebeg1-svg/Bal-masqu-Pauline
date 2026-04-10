@@ -6,13 +6,13 @@
   <title>Bal Masqué de Pauline 🎭</title>
   <style>
     :root {
-      --noir: #0d0a14;
-      --violet-deep: #2a0d4a;
-      --violet: #6b21a8;
-      --violet-light: #a855f7;
-      --violet-pale: #e9d5ff;
+      --noir: #0d0a0d;
+      --rose-deep: #3d0a1a;
+      --rose: #be185d;
+      --rose-light: #f472b6;
+      --rose-pale: #fce7f3;
       --or: #d4a017;
-      --blanc: #f5f0ff;
+      --blanc: #ffffff;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,8 +38,8 @@
         radial-gradient(1px 1px at 20% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
         radial-gradient(1px 1px at 60% 50%, rgba(255,255,255,0.5) 0%, transparent 100%),
         radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(2px 2px at 40% 35%, rgba(168,85,247,0.5) 0%, transparent 100%),
-        radial-gradient(2px 2px at 75% 65%, rgba(168,85,247,0.4) 0%, transparent 100%);
+        radial-gradient(2px 2px at 40% 35%, rgba(244,114,182,0.5) 0%, transparent 100%),
+        radial-gradient(2px 2px at 75% 65%, rgba(244,114,182,0.4) 0%, transparent 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -51,21 +51,21 @@
       z-index: 100;
       background: rgba(13, 10, 20, 0.85);
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(168,85,247,0.3);
+      border-bottom: 1px solid rgba(244,114,182,0.3);
       padding: 0.75rem 2rem;
       display: flex;
       justify-content: center;
       gap: 2rem;
     }
     nav a {
-      color: var(--violet-pale);
+      color: var(--rose-pale);
       text-decoration: none;
       font-size: 0.85rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
-    nav a:hover { color: var(--violet-light); }
+    nav a:hover { color: var(--rose-light); }
 
     /* ── Sections générales ── */
     section {
@@ -81,14 +81,14 @@
       font-weight: normal;
       letter-spacing: 0.15em;
       text-align: center;
-      color: var(--violet-light);
+      color: var(--rose-light);
       margin-bottom: 0.5rem;
       text-transform: uppercase;
     }
     .divider {
       width: 60px;
       height: 1px;
-      background: linear-gradient(to right, transparent, var(--violet-light), transparent);
+      background: linear-gradient(to right, transparent, var(--rose-light), transparent);
       margin: 0.5rem auto 2.5rem;
     }
 
@@ -111,7 +111,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--violet-light);
+      color: var(--rose-light);
       margin-bottom: 1rem;
     }
     .hero-title {
@@ -120,7 +120,7 @@
       letter-spacing: 0.05em;
       line-height: 1.1;
       margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, var(--blanc) 0%, var(--violet-pale) 50%, var(--violet-light) 100%);
+      background: linear-gradient(135deg, var(--blanc) 0%, var(--rose-pale) 50%, var(--rose-light) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -154,7 +154,7 @@
     .countdown-number {
       font-size: 2.5rem;
       font-weight: bold;
-      color: var(--violet-light);
+      color: var(--rose-light);
       display: block;
       line-height: 1;
     }
@@ -162,13 +162,13 @@
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--violet-pale);
+      color: var(--rose-pale);
       opacity: 0.7;
       margin-top: 0.3rem;
     }
     .countdown-separator {
       font-size: 2rem;
-      color: var(--violet);
+      color: var(--rose);
       align-self: flex-start;
       padding-top: 0.3rem;
     }
@@ -180,8 +180,8 @@
       gap: 1.5rem;
     }
     .info-card {
-      background: rgba(107, 33, 168, 0.12);
-      border: 1px solid rgba(168, 85, 247, 0.3);
+      background: rgba(190, 24, 93, 0.12);
+      border: 1px solid rgba(244, 114, 182, 0.3);
       border-radius: 12px;
       padding: 1.5rem;
       text-align: center;
@@ -195,17 +195,17 @@
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--violet-light);
+      color: var(--rose-light);
       margin-bottom: 0.5rem;
       font-weight: normal;
     }
     .info-card p {
       font-size: 0.95rem;
       line-height: 1.6;
-      color: var(--violet-pale);
+      color: var(--rose-pale);
     }
     .info-card .placeholder {
-      color: rgba(233, 213, 255, 0.4);
+      color: rgba(252, 231, 243, 0.4);
       font-style: italic;
     }
 
@@ -221,7 +221,7 @@
       gap: 1.5rem;
       align-items: flex-start;
       padding: 1.25rem 0;
-      border-bottom: 1px solid rgba(168,85,247,0.15);
+      border-bottom: 1px solid rgba(244,114,182,0.15);
     }
     .programme-item:last-child { border-bottom: none; }
     .programme-time {
@@ -243,7 +243,7 @@
     }
     .programme-desc span {
       font-size: 0.85rem;
-      color: var(--violet-pale);
+      color: var(--rose-pale);
       opacity: 0.7;
     }
 
@@ -256,14 +256,14 @@
     .gallery-item {
       aspect-ratio: 1;
       border-radius: 8px;
-      background: rgba(107, 33, 168, 0.15);
-      border: 1px dashed rgba(168,85,247,0.3);
+      background: rgba(190, 24, 93, 0.15);
+      border: 1px dashed rgba(244,114,182,0.3);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      color: rgba(233,213,255,0.3);
+      color: rgba(252,231,243,0.3);
       font-size: 0.8rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -284,9 +284,9 @@
 
     /* ── RSVP ── */
     #rsvp {
-      background: rgba(42, 13, 74, 0.4);
-      border-top: 1px solid rgba(168,85,247,0.2);
-      border-bottom: 1px solid rgba(168,85,247,0.2);
+      background: rgba(61, 10, 26, 0.4);
+      border-top: 1px solid rgba(244,114,182,0.2);
+      border-bottom: 1px solid rgba(244,114,182,0.2);
     }
     .rsvp-form {
       max-width: 500px;
@@ -309,13 +309,13 @@
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--violet-light);
+      color: var(--rose-light);
     }
     .form-group input,
     .form-group select,
     .form-group textarea {
       background: rgba(13, 10, 20, 0.6);
-      border: 1px solid rgba(168,85,247,0.4);
+      border: 1px solid rgba(244,114,182,0.4);
       border-radius: 8px;
       color: var(--blanc);
       font-size: 0.95rem;
@@ -327,12 +327,12 @@
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: var(--violet-light);
+      border-color: var(--rose-light);
     }
     .form-group select option { background: var(--noir); }
     .form-group textarea { resize: vertical; min-height: 80px; }
     .btn-rsvp {
-      background: linear-gradient(135deg, var(--violet) 0%, #9333ea 100%);
+      background: linear-gradient(135deg, var(--rose) 0%, #f472b6 100%);
       border: none;
       border-radius: 8px;
       color: white;
@@ -351,7 +351,7 @@
       display: none;
       text-align: center;
       padding: 2rem;
-      color: var(--violet-pale);
+      color: var(--rose-pale);
     }
     #rsvp-success .success-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
 
@@ -362,7 +362,7 @@
       text-align: center;
       padding: 2rem;
       font-size: 0.8rem;
-      color: rgba(233,213,255,0.3);
+      color: rgba(252,231,243,0.3);
       letter-spacing: 0.1em;
     }
 
@@ -431,7 +431,7 @@
       <div class="info-card">
         <span class="info-icon">🎭</span>
         <h3>Dress code</h3>
-        <p>Masque <strong>obligatoire</strong> !<br>Tenue de soirée élégante.<br>Couleurs : noir, violet, or.</p>
+        <p>Masque <strong>obligatoire</strong> !<br>Tenue de soirée élégante.<br>Couleurs : noir, rose et blanc.</p>
       </div>
       <div class="info-card">
         <span class="info-icon">🎁</span>
@@ -495,7 +495,7 @@
   <section id="galerie">
     <h2 class="section-title">Galerie photos</h2>
     <div class="divider"></div>
-    <p style="text-align:center; color: rgba(233,213,255,0.5); font-size: 0.85rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;">
+    <p style="text-align:center; color: rgba(252,231,243,0.5); font-size: 0.85rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;">
       Les photos seront ajoutées après la fête ✨
     </p>
     <div class="gallery-grid">
@@ -582,7 +582,7 @@
       const diff = EVENT_DATE - now;
       if (diff <= 0) {
         document.getElementById('countdown').innerHTML =
-          '<p style="color: var(--violet-light); font-size: 1.2rem; letter-spacing: 0.2em;">🎉 C\'est aujourd\'hui ! 🎉</p>';
+          '<p style="color: var(--rose-light); font-size: 1.2rem; letter-spacing: 0.2em;">🎉 C\'est aujourd\'hui ! 🎉</p>';
         return;
       }
       const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
