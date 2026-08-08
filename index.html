@@ -4,68 +4,75 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bal Masqué de Pauline 🎭</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:wght@500;600;700;800&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --noir: #0d0a0d;
-      --rose-deep: #3d0a1a;
-      --rose: #be185d;
-      --rose-light: #f472b6;
-      --rose-pale: #fce7f3;
-      --or: #d4a017;
-      --blanc: #ffffff;
+      --blush-pale: #fdeaf1;
+      --blush: #fbd7e6;
+      --pink: #f472a6;
+      --pink-strong: #ec4899;
+      --pink-deep: #c2185b;
+      --burgundy: #8e1c42;
+      --smoke: #9c7d88;
+      --plum: #2b1620;
+      --plum-soft: #4a2536;
+      --ink: #201018;
+      --white: #ffffff;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Georgia', serif;
-      background-color: var(--noir);
-      color: var(--blanc);
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--blush-pale);
+      color: var(--ink);
       overflow-x: hidden;
     }
 
-    /* ── Étoiles en fond ── */
+    /* ── Fond aquarelle ── */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 20% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 60% 50%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(2px 2px at 40% 35%, rgba(244,114,182,0.5) 0%, transparent 100%),
-        radial-gradient(2px 2px at 75% 65%, rgba(244,114,182,0.4) 0%, transparent 100%);
+        radial-gradient(ellipse 32% 22% at 12% 10%, rgba(156,125,136,0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 24% at 85% 8%, rgba(236,72,153,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 34% 26% at 92% 45%, rgba(156,125,136,0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 28% 22% at 6% 55%, rgba(236,72,153,0.3) 0%, transparent 70%),
+        radial-gradient(ellipse 36% 28% at 90% 85%, rgba(156,125,136,0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 24% at 10% 92%, rgba(194,24,91,0.3) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 30%, rgba(244,114,166,0.25) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
+
+    ::selection { background: var(--pink-strong); color: var(--white); }
 
     /* ── Navigation ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(13, 10, 20, 0.85);
+      background: rgba(253, 234, 241, 0.88);
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(244,114,182,0.3);
-      padding: 0.75rem 2rem;
+      border-bottom: 1px solid rgba(194,24,91,0.25);
+      padding: 0.85rem 2rem;
       display: flex;
       justify-content: center;
       gap: 2rem;
     }
     nav a {
-      color: var(--rose-pale);
+      color: var(--burgundy);
       text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
-    nav a:hover { color: var(--rose-light); }
+    nav a:hover { color: var(--pink-deep); }
 
     /* ── Sections générales ── */
     section {
@@ -77,22 +84,32 @@
     }
 
     .section-title {
-      font-size: 1.6rem;
-      font-weight: normal;
-      letter-spacing: 0.15em;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       text-align: center;
-      color: var(--rose-light);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
     }
     .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin: 0.6rem auto 2.5rem;
+      color: var(--pink-deep);
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
       width: 60px;
       height: 1px;
-      background: linear-gradient(to right, transparent, var(--rose-light), transparent);
-      margin: 0.5rem auto 2.5rem;
+      background: linear-gradient(to right, transparent, var(--pink-deep));
     }
+    .divider::after { background: linear-gradient(to left, transparent, var(--pink-deep)); }
 
-    /* ── Hero ── */
+    /* ── Hero / carte Save the Date ── */
     #hero {
       min-height: 100vh;
       display: flex;
@@ -100,43 +117,38 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 6rem 1.5rem 4rem;
+      padding: 7rem 1.5rem 4rem;
     }
-    .mask-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
+    .invite-card {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(142,28,66,0.45), 0 0 0 1px rgba(255,255,255,0.6);
+    }
+    .invite-card img {
       display: block;
+      width: 100%;
+      height: auto;
     }
     .hero-subtitle {
-      font-size: 0.9rem;
-      letter-spacing: 0.3em;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--rose-light);
-      margin-bottom: 1rem;
-    }
-    .hero-title {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      font-weight: normal;
-      letter-spacing: 0.05em;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, var(--blanc) 0%, var(--rose-pale) 50%, var(--rose-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--burgundy);
+      margin-top: 2.2rem;
     }
     .hero-date {
-      font-size: 1.1rem;
-      letter-spacing: 0.2em;
-      color: var(--or);
-      margin-top: 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--pink-deep);
+      margin-top: 0.6rem;
       text-transform: uppercase;
-    }
-    .hero-border {
-      width: 200px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--or), transparent);
-      margin: 2rem auto;
     }
 
     /* ── Compte à rebours ── */
@@ -145,32 +157,37 @@
       gap: 1.5rem;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 1rem;
+      margin-top: 2rem;
     }
     .countdown-block {
       text-align: center;
       min-width: 70px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(194,24,91,0.25);
+      border-radius: 12px;
+      padding: 0.75rem 0.5rem;
     }
     .countdown-number {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--rose-light);
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--pink-deep);
       display: block;
       line-height: 1;
     }
     .countdown-label {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
+      font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--rose-pale);
-      opacity: 0.7;
-      margin-top: 0.3rem;
+      color: var(--burgundy);
+      opacity: 0.8;
+      margin-top: 0.4rem;
     }
     .countdown-separator {
-      font-size: 2rem;
-      color: var(--rose);
-      align-self: flex-start;
-      padding-top: 0.3rem;
+      font-size: 1.6rem;
+      color: var(--smoke);
+      align-self: center;
     }
 
     /* ── Infos ── */
@@ -180,8 +197,8 @@
       gap: 1.5rem;
     }
     .info-card {
-      background: rgba(190, 24, 93, 0.12);
-      border: 1px solid rgba(244, 114, 182, 0.3);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(194, 24, 91, 0.25);
       border-radius: 12px;
       padding: 1.5rem;
       text-align: center;
@@ -192,20 +209,21 @@
       margin-bottom: 0.75rem;
     }
     .info-card h3 {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--rose-light);
+      color: var(--pink-deep);
       margin-bottom: 0.5rem;
-      font-weight: normal;
+      font-weight: 700;
     }
     .info-card p {
       font-size: 0.95rem;
       line-height: 1.6;
-      color: var(--rose-pale);
+      color: var(--plum-soft);
     }
     .info-card .placeholder {
-      color: rgba(252, 231, 243, 0.4);
+      color: rgba(74, 37, 54, 0.45);
       font-style: italic;
     }
 
@@ -221,13 +239,15 @@
       gap: 1.5rem;
       align-items: flex-start;
       padding: 1.25rem 0;
-      border-bottom: 1px solid rgba(244,114,182,0.15);
+      border-bottom: 1px solid rgba(194,24,91,0.18);
     }
     .programme-item:last-child { border-bottom: none; }
     .programme-time {
-      font-size: 0.85rem;
-      color: var(--or);
-      letter-spacing: 0.1em;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+      letter-spacing: 0.05em;
       min-width: 55px;
       padding-top: 2px;
     }
@@ -236,15 +256,16 @@
     }
     .programme-desc strong {
       display: block;
-      font-size: 1rem;
-      color: var(--blanc);
-      font-weight: normal;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      font-weight: 700;
       margin-bottom: 0.2rem;
     }
     .programme-desc span {
       font-size: 0.85rem;
-      color: var(--rose-pale);
-      opacity: 0.7;
+      color: var(--plum-soft);
+      opacity: 0.8;
     }
 
     /* ── Galerie ── */
@@ -256,15 +277,16 @@
     .gallery-item {
       aspect-ratio: 1;
       border-radius: 8px;
-      background: rgba(190, 24, 93, 0.15);
-      border: 1px dashed rgba(244,114,182,0.3);
+      background: rgba(255,255,255,0.45);
+      border: 1px dashed rgba(194,24,91,0.35);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      color: rgba(252,231,243,0.3);
+      color: rgba(74,37,54,0.45);
       font-size: 0.8rem;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       cursor: pointer;
@@ -284,9 +306,9 @@
 
     /* ── RSVP ── */
     #rsvp {
-      background: rgba(61, 10, 26, 0.4);
-      border-top: 1px solid rgba(244,114,182,0.2);
-      border-bottom: 1px solid rgba(244,114,182,0.2);
+      background: rgba(255,255,255,0.35);
+      border-top: 1px solid rgba(194,24,91,0.2);
+      border-bottom: 1px solid rgba(194,24,91,0.2);
     }
     .rsvp-form {
       max-width: 500px;
@@ -307,38 +329,42 @@
     }
     .form-group label {
       font-size: 0.75rem;
-      letter-spacing: 0.15em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--rose-light);
+      color: var(--pink-deep);
     }
     .form-group input,
     .form-group select,
     .form-group textarea {
-      background: rgba(13, 10, 20, 0.6);
-      border: 1px solid rgba(244,114,182,0.4);
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(194,24,91,0.35);
       border-radius: 8px;
-      color: var(--blanc);
+      color: var(--ink);
       font-size: 0.95rem;
       padding: 0.65rem 0.9rem;
-      font-family: Georgia, serif;
+      font-family: 'Montserrat', sans-serif;
       outline: none;
       transition: border-color 0.2s;
     }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(43,22,32,0.4); }
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: var(--rose-light);
+      border-color: var(--pink-deep);
     }
-    .form-group select option { background: var(--noir); }
+    .form-group select option { background: var(--white); }
     .form-group textarea { resize: vertical; min-height: 80px; }
     .btn-rsvp {
-      background: linear-gradient(135deg, var(--rose) 0%, #f472b6 100%);
+      background: linear-gradient(135deg, var(--pink-deep) 0%, var(--pink) 100%);
       border: none;
       border-radius: 8px;
       color: white;
-      font-family: Georgia, serif;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
       font-size: 0.9rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       padding: 0.9rem 2rem;
       cursor: pointer;
@@ -351,7 +377,7 @@
       display: none;
       text-align: center;
       padding: 2rem;
-      color: var(--rose-pale);
+      color: var(--plum-soft);
     }
     #rsvp-success .success-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
 
@@ -360,10 +386,20 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      padding: 2rem;
-      font-size: 0.8rem;
-      color: rgba(252,231,243,0.3);
+      padding: 2.5rem 2rem;
+    }
+    footer p.footer-main {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--burgundy);
       letter-spacing: 0.1em;
+    }
+    footer p.footer-credit {
+      font-family: 'Alex Brush', cursive;
+      font-size: 1.3rem;
+      color: var(--pink-deep);
+      margin-top: 0.6rem;
     }
 
     @media (max-width: 500px) {
@@ -383,14 +419,14 @@
 
   <!-- ══ HERO ══ -->
   <section id="hero">
-    <span class="mask-icon">🎭</span>
-    <p class="hero-subtitle">Tu es convié·e au</p>
-    <h1 class="hero-title">Bal Masqué<br>de Pauline</h1>
-    <div class="hero-border"></div>
-    <p class="hero-date" id="event-date">📅 12 Décembre 2026</p>
+    <div class="invite-card">
+      <img src="images/save-the-date.jpg" alt="Save the Date — Bal Masqué de Pauline, 10 ans, 12 décembre 2026" />
+    </div>
+    <p class="hero-subtitle">Tu es convié·e</p>
+    <p class="hero-date" id="event-date">📅 12 Décembre 2026 · 17h00</p>
 
     <!-- Compte à rebours -->
-    <div id="countdown" style="margin-top: 2.5rem;">
+    <div id="countdown">
       <div class="countdown-block">
         <span class="countdown-number" id="cd-days">--</span>
         <span class="countdown-label">Jours</span>
@@ -416,7 +452,7 @@
   <!-- ══ INFOS PRATIQUES ══ -->
   <section id="infos">
     <h2 class="section-title">Informations pratiques</h2>
-    <div class="divider"></div>
+    <div class="divider">♥</div>
     <div class="info-grid">
       <div class="info-card">
         <span class="info-icon">📍</span>
@@ -444,7 +480,7 @@
   <!-- ══ PROGRAMME ══ -->
   <section id="programme">
     <h2 class="section-title">Programme de la soirée</h2>
-    <div class="divider"></div>
+    <div class="divider">♥</div>
     <ul class="programme-list">
       <li class="programme-item">
         <span class="programme-time">??h00</span>
@@ -494,8 +530,8 @@
   <!-- ══ GALERIE PHOTOS ══ -->
   <section id="galerie">
     <h2 class="section-title">Galerie photos</h2>
-    <div class="divider"></div>
-    <p style="text-align:center; color: rgba(252,231,243,0.5); font-size: 0.85rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;">
+    <div class="divider">♥</div>
+    <p style="text-align:center; color: rgba(74,37,54,0.6); font-size: 0.85rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;">
       Les photos seront ajoutées après la fête ✨
     </p>
     <div class="gallery-grid">
@@ -530,7 +566,7 @@
   <!-- ══ RSVP ══ -->
   <section id="rsvp">
     <h2 class="section-title">Confirmer ta présence</h2>
-    <div class="divider"></div>
+    <div class="divider">♥</div>
     <form class="rsvp-form" id="rsvp-form" onsubmit="handleRSVP(event)">
       <div class="form-row">
         <div class="form-group">
@@ -569,12 +605,12 @@
 
   <!-- ══ FOOTER ══ -->
   <footer>
-    <p>🎭 Bal Masqué de Pauline — 12 Décembre 2026 🎭</p>
+    <p class="footer-main">🎭 Bal Masqué de Pauline — 12 Décembre 2026 🎭</p>
+    <p class="footer-credit">Visuel imaginé par Lisa ♥</p>
   </footer>
 
   <script>
     // ── Compte à rebours ──
-    // TODO : mets ici la vraie date de la fête
     const EVENT_DATE = new Date('2026-12-12T17:00:00');
 
     function updateCountdown() {
@@ -582,7 +618,7 @@
       const diff = EVENT_DATE - now;
       if (diff <= 0) {
         document.getElementById('countdown').innerHTML =
-          '<p style="color: var(--rose-light); font-size: 1.2rem; letter-spacing: 0.2em;">🎉 C\'est aujourd\'hui ! 🎉</p>';
+          '<p style="color: var(--pink-deep); font-size: 1.2rem; letter-spacing: 0.2em;">🎉 C\'est aujourd\'hui ! 🎉</p>';
         return;
       }
       const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
