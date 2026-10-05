@@ -222,6 +222,17 @@
       line-height: 1.6;
       color: var(--plum-soft);
     }
+    .info-link {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--pink-deep);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(194,24,91,0.4);
+    }
+    .info-link:hover { color: var(--burgundy); border-bottom-color: var(--burgundy); }
     .info-card .placeholder {
       color: rgba(74, 37, 54, 0.45);
       font-style: italic;
@@ -467,6 +478,11 @@
       padding: 2rem;
       color: var(--plum-soft);
     }
+    #rsvp-error {
+      text-align: center;
+      color: var(--pink-deep);
+      font-size: 0.9rem;
+    }
     #rsvp-success .success-icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
 
     /* ── Footer ── */
@@ -546,7 +562,8 @@
       <div class="info-card">
         <span class="info-icon">📍</span>
         <h3>Lieu</h3>
-        <p class="placeholder">Adresse à compléter</p>
+        <p><strong>Stand de Volson</strong><br>Ch. du Stand<br>1009 Pully</p>
+        <a class="info-link" href="https://maps.app.goo.gl/BusHx8FU2bupFdVw5" target="_blank" rel="noopener">Voir sur Google Maps →</a>
       </div>
       <div class="info-card">
         <span class="info-icon">🕰️</span>
@@ -561,7 +578,7 @@
       <div class="info-card">
         <span class="info-icon">🎁</span>
         <h3>Cadeaux</h3>
-        <p>Ta présence est le plus beau des cadeaux. ✨</p>
+        <p>Une boîte à enveloppes sera sur place pour aider Pauline à réaliser l’un de ses multiples rêves. ✨</p>
       </div>
     </div>
   </section>
@@ -681,24 +698,26 @@
   <section id="rsvp">
     <h2 class="section-title">Confirmer ta présence</h2>
     <div class="divider">♥</div>
-    <form class="rsvp-form" id="rsvp-form" onsubmit="handleRSVP(event)">
+    <form class="rsvp-form" id="rsvp-form" name="rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleRSVP(event)">
+      <input type="hidden" name="form-name" value="rsvp" />
+      <p hidden><label>Ne pas remplir : <input name="bot-field" /></label></p>
       <div class="form-row">
         <div class="form-group">
           <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" placeholder="Ton prénom" required />
+          <input type="text" id="prenom" name="prenom" placeholder="Ton prénom" required />
         </div>
         <div class="form-group">
           <label for="nom">Nom</label>
-          <input type="text" id="nom" placeholder="Ton nom" required />
+          <input type="text" id="nom" name="nom" placeholder="Ton nom" required />
         </div>
       </div>
       <div class="form-group">
         <label for="email">Email (pour confirmation)</label>
-        <input type="email" id="email" placeholder="ton@email.com" />
+        <input type="email" id="email" name="email" placeholder="ton@email.com" />
       </div>
       <div class="form-group">
         <label for="presence">Présence</label>
-        <select id="presence" required>
+        <select id="presence" name="presence" required>
           <option value="">Choisir...</option>
           <option value="oui">✅ Oui, je serai là !</option>
           <option value="non">❌ Je ne pourrai pas venir</option>
@@ -707,9 +726,10 @@
       </div>
       <div class="form-group">
         <label for="message">Un message pour Pauline ? (optionnel)</label>
-        <textarea id="message" placeholder="Écris ton message ici..."></textarea>
+        <textarea id="message" name="message" placeholder="Écris ton message ici..."></textarea>
       </div>
       <button type="submit" class="btn-rsvp">Envoyer ma réponse 🎭</button>
+      <p id="rsvp-error" role="alert" hidden>Oups, l’envoi n’a pas fonctionné. Réessaie dans un instant !</p>
     </form>
     <div id="rsvp-success">
       <span class="success-icon">🎉</span>
@@ -747,12 +767,27 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // ── RSVP (simulation locale — à brancher sur un vrai backend si besoin) ──
-    function handleRSVP(e) {
+    // ── RSVP (Netlify Forms — notifications email configurées dans Netlify) ──
+    async function handleRSVP(e) {
       e.preventDefault();
-      document.getElementById('rsvp-form').style.display = 'none';
-      document.getElementById('rsvp-success').style.display = 'block';
-      // TODO : envoyer les données vers un service (Formspree, EmailJS, etc.)
+      const form = e.target;
+      const button = form.querySelector('button[type="submit"]');
+      const error = document.getElementById('rsvp-error');
+      button.disabled = true;
+      error.hidden = true;
+      try {
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString(),
+        });
+        if (!res.ok) throw new Error(res.status);
+        form.style.display = 'none';
+        document.getElementById('rsvp-success').style.display = 'block';
+      } catch {
+        error.hidden = false;
+        button.disabled = false;
+      }
     }
 
     // ── Galerie : onglets ──
