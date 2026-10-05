@@ -2,6 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    // Le QR code des cartons pointe vers GitHub Pages, où le formulaire ne peut pas fonctionner :
+    // on renvoie vers le site Netlify, qui reçoit les réponses.
+    if (location.hostname.endsWith('github.io')) {
+      location.replace('https://balmasquepauline.netlify.app/' + location.search + location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bal Masqué de Pauline 🎭</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
