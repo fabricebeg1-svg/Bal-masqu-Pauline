@@ -271,11 +271,45 @@
     /* ── Galerie ── */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
-    .gallery-item {
-      aspect-ratio: 1;
+    .gallery-intro {
+      text-align: center;
+      color: rgba(74,37,54,0.7);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+    .gallery-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .gallery-tab {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(194,24,91,0.35);
+      border-radius: 999px;
+      padding: 0.6rem 1.2rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .gallery-tab:hover { background: rgba(255,255,255,0.85); }
+    .gallery-tab.active {
+      background: linear-gradient(135deg, var(--pink-deep) 0%, var(--pink) 100%);
+      border-color: transparent;
+      color: var(--white);
+    }
+    .gallery-placeholder {
+      aspect-ratio: 3 / 4;
       border-radius: 8px;
       background: rgba(255,255,255,0.45);
       border: 1px dashed rgba(194,24,91,0.35);
@@ -289,20 +323,74 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+    }
+    .gallery-placeholder span { font-size: 2rem; }
+    .gallery-item {
+      aspect-ratio: 3 / 4;
+      border-radius: 8px;
+      border: 4px solid var(--white);
+      background: var(--white);
+      box-shadow: 0 10px 25px -12px rgba(142,28,66,0.45);
+      padding: 0;
+      cursor: zoom-in;
       position: relative;
       overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
+    .gallery-item:hover,
+    .gallery-item:focus-visible {
+      transform: translateY(-4px) rotate(-1deg);
+      box-shadow: 0 18px 35px -12px rgba(142,28,66,0.55);
+      outline: none;
+    }
+    .gallery-item:nth-child(even):hover,
+    .gallery-item:nth-child(even):focus-visible { transform: translateY(-4px) rotate(1deg); }
     .gallery-item img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      object-position: center 25%;
+      border-radius: 4px;
     }
-    .gallery-placeholder-icon { font-size: 2rem; }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(32,16,24,0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 88vh;
+      border-radius: 6px;
+      border: 4px solid var(--white);
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.6);
+    }
+    .lightbox button {
+      position: absolute;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: var(--white);
+      font-size: 1.6rem;
+      line-height: 1;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lightbox button:hover { background: var(--pink-deep); }
+    .lightbox-close { top: 1rem; right: 1rem; }
+    .lightbox-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+    .lightbox-next { right: 1rem; top: 50%; transform: translateY(-50%); }
 
     /* ── RSVP ── */
     #rsvp {
@@ -405,6 +493,7 @@
     @media (max-width: 500px) {
       .form-row { grid-template-columns: 1fr; }
       nav { gap: 1rem; font-size: 0.75rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -423,7 +512,7 @@
       <img src="images/save-the-date.jpg" alt="Save the Date — Bal Masqué de Pauline, 10 ans, 12 décembre 2026" />
     </div>
     <p class="hero-subtitle">Tu es convié·e</p>
-    <p class="hero-date" id="event-date">📅 12 Décembre 2026 · 17h00</p>
+    <p class="hero-date" id="event-date">📅 12 Décembre 2026 · 16h00</p>
 
     <!-- Compte à rebours -->
     <div id="countdown">
@@ -462,7 +551,7 @@
       <div class="info-card">
         <span class="info-icon">🕰️</span>
         <h3>Horaires</h3>
-        <p class="placeholder">Heure de début – Heure de fin<br>à confirmer</p>
+        <p>De 16h00 à 21h00</p>
       </div>
       <div class="info-card">
         <span class="info-icon">🎭</span>
@@ -483,45 +572,59 @@
     <div class="divider">♥</div>
     <ul class="programme-list">
       <li class="programme-item">
-        <span class="programme-time">??h00</span>
+        <span class="programme-time">16h00</span>
         <div class="programme-desc">
-          <strong>Accueil des invités</strong>
-          <span>Distribution des masques & boissons de bienvenue</span>
+          <strong>Ouverture du bal</strong>
+          <span>Accueil des invités</span>
         </div>
       </li>
       <li class="programme-item">
-        <span class="programme-time">??h30</span>
+        <span class="programme-time">16h30</span>
         <div class="programme-desc">
-          <strong>Défilé masqué</strong>
-          <span>Qui se cache derrière le masque ?</span>
+          <strong>Bal masqué</strong>
+          <span>Première partie</span>
         </div>
       </li>
       <li class="programme-item">
-        <span class="programme-time">??h00</span>
+        <span class="programme-time">17h30</span>
         <div class="programme-desc">
-          <strong>Buffet & festin</strong>
-          <span>À table, les mystérieux convives !</span>
+          <strong>L’énigme des masques</strong>
+          <span>Saurez-vous découvrir qui se cache derrière l’invité·e mystère ?</span>
         </div>
       </li>
       <li class="programme-item">
-        <span class="programme-time">??h00</span>
+        <span class="programme-time">18h15</span>
         <div class="programme-desc">
-          <strong>Animations & jeux</strong>
-          <span>Surprises... à révéler le soir même</span>
+          <strong>Bal masqué</strong>
+          <span>Deuxième partie</span>
         </div>
       </li>
       <li class="programme-item">
-        <span class="programme-time">??h30</span>
+        <span class="programme-time">19h15</span>
         <div class="programme-desc">
-          <strong>Gâteau d'anniversaire</strong>
+          <strong>Place au gâteau !</strong>
           <span>Happy Birthday Pauline ! 🎂</span>
         </div>
       </li>
       <li class="programme-item">
-        <span class="programme-time">??h00</span>
+        <span class="programme-time">20h00</span>
         <div class="programme-desc">
-          <strong>Bal & danse</strong>
-          <span>La piste de danse ouvre ses portes</span>
+          <strong>Grande tombola</strong>
+          <span>Tirage au sort</span>
+        </div>
+      </li>
+      <li class="programme-item">
+        <span class="programme-time">20h15</span>
+        <div class="programme-desc">
+          <strong>Bal masqué</strong>
+          <span>Dernière partie</span>
+        </div>
+      </li>
+      <li class="programme-item">
+        <span class="programme-time">21h00</span>
+        <div class="programme-desc">
+          <strong>Fin du bal…</strong>
+          <span>… et des festivités !</span>
         </div>
       </li>
     </ul>
@@ -531,37 +634,48 @@
   <section id="galerie">
     <h2 class="section-title">Galerie photos</h2>
     <div class="divider">♥</div>
-    <p style="text-align:center; color: rgba(74,37,54,0.6); font-size: 0.85rem; margin-bottom: 1.5rem; letter-spacing: 0.05em;">
-      Les photos seront ajoutées après la fête ✨
-    </p>
+    <div class="gallery-tabs" role="tablist">
+      <button class="gallery-tab active" role="tab" aria-selected="true" aria-controls="panel-souvenirs" id="tab-souvenirs">Pauline au fil des ans</button>
+      <button class="gallery-tab" role="tab" aria-selected="false" aria-controls="panel-fete" id="tab-fete" tabindex="-1">Photos de la fête</button>
+    </div>
+
+    <!-- Onglet 1 : souvenirs -->
+    <div class="gallery-panel" id="panel-souvenirs" role="tabpanel" aria-labelledby="tab-souvenirs">
+    <p class="gallery-intro">10 ans de sourires ✨</p>
     <div class="gallery-grid">
-      <!-- Ajoute tes images ici : <img src="photos/ma-photo.jpg" alt="description"> -->
-      <div class="gallery-item">
-        <span class="gallery-placeholder-icon">🎭</span>
-        <span>Photo 1</span>
-      </div>
-      <div class="gallery-item">
-        <span class="gallery-placeholder-icon">✨</span>
-        <span>Photo 2</span>
-      </div>
-      <div class="gallery-item">
-        <span class="gallery-placeholder-icon">🎂</span>
-        <span>Photo 3</span>
-      </div>
-      <div class="gallery-item">
-        <span class="gallery-placeholder-icon">🎶</span>
-        <span>Photo 4</span>
-      </div>
-      <div class="gallery-item">
-        <span class="gallery-placeholder-icon">🌟</span>
-        <span>Photo 5</span>
-      </div>
-      <div class="gallery-item">
-        <span class="gallery-placeholder-icon">🎀</span>
-        <span>Photo 6</span>
-      </div>
+      <!-- Pour ajouter une photo : copie-la dans images/photos/ puis duplique un bouton ci-dessous -->
+      <button class="gallery-item"><img src="images/photos/pauline-1.jpg" alt="Pauline bébé, tout sourire avec son doudou rose" loading="lazy"></button>
+      <button class="gallery-item"><img src="images/photos/pauline-3.jpg" alt="Pauline bébé au volant de sa petite voiture rose" loading="lazy"></button>
+      <button class="gallery-item"><img src="images/photos/pauline-7.jpg" alt="Pauline avec un casque anti-bruit vert fluo" loading="lazy"></button>
+      <button class="gallery-item"><img src="images/photos/pauline-6.jpg" alt="Pauline en princesse, robe rose et diadème" loading="lazy"></button>
+      <button class="gallery-item"><img src="images/photos/pauline-8.jpg" alt="Grand sourire de Pauline" loading="lazy"></button>
+      <button class="gallery-item"><img src="images/photos/pauline-5.jpg" alt="Pauline devant un petit gâteau avec une bougie rose" loading="lazy"></button>
+      <button class="gallery-item"><img src="images/photos/pauline-4.jpg" alt="Pauline au bord du lac, qui montre ses muscles" loading="lazy"></button>
+      <button class="gallery-item"><img src="images/photos/pauline-2.jpg" alt="Pauline et son gâteau d'anniversaire Kuromi" loading="lazy"></button>
+      <button class="gallery-item"><img src="images/photos/pauline-9.jpg" alt="Pauline qui prend la pose en débardeur rose" loading="lazy"></button>
+    </div>
+    </div>
+
+    <!-- Onglet 2 : photos de la fête (à remplir après le 12 décembre) -->
+    <div class="gallery-panel" id="panel-fete" role="tabpanel" aria-labelledby="tab-fete" hidden>
+    <p class="gallery-intro">Les photos du bal masqué arriveront ici après la fête 🎭</p>
+    <div class="gallery-grid">
+      <!-- Pour ajouter une photo de la fête : copie-la dans images/fete/ puis ajoute une ligne comme :
+           <button class="gallery-item"><img src="images/fete/fete-1.jpg" alt="description" loading="lazy"></button>
+           et supprime les cases « À venir » ci-dessous. -->
+      <div class="gallery-placeholder"><span>🎭</span>À venir</div>
+      <div class="gallery-placeholder"><span>✨</span>À venir</div>
+      <div class="gallery-placeholder"><span>🎂</span>À venir</div>
+    </div>
     </div>
   </section>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo agrandie">
+    <button class="lightbox-close" aria-label="Fermer">×</button>
+    <button class="lightbox-prev" aria-label="Photo précédente">‹</button>
+    <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-next" aria-label="Photo suivante">›</button>
+  </div>
 
   <!-- ══ RSVP ══ -->
   <section id="rsvp">
@@ -611,7 +725,7 @@
 
   <script>
     // ── Compte à rebours ──
-    const EVENT_DATE = new Date('2026-12-12T17:00:00');
+    const EVENT_DATE = new Date('2026-12-12T16:00:00');
 
     function updateCountdown() {
       const now = new Date();
@@ -640,6 +754,62 @@
       document.getElementById('rsvp-success').style.display = 'block';
       // TODO : envoyer les données vers un service (Formspree, EmailJS, etc.)
     }
+
+    // ── Galerie : onglets ──
+    const galleryTabs = [...document.querySelectorAll('.gallery-tab')];
+    function selectTab(tab) {
+      galleryTabs.forEach(t => {
+        const selected = t === tab;
+        t.classList.toggle('active', selected);
+        t.setAttribute('aria-selected', selected);
+        t.tabIndex = selected ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
+      });
+    }
+    galleryTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => selectTab(tab));
+      tab.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        const next = galleryTabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + galleryTabs.length) % galleryTabs.length];
+        selectTab(next);
+        next.focus();
+      });
+    });
+
+    // ── Galerie : agrandissement des photos (navigation limitée à l'onglet ouvert) ──
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let galleryImgs = [];
+    let currentPhoto = 0;
+
+    function showPhoto(i) {
+      currentPhoto = (i + galleryImgs.length) % galleryImgs.length;
+      lightboxImg.src = galleryImgs[currentPhoto].src;
+      lightboxImg.alt = galleryImgs[currentPhoto].alt;
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      galleryImgs[currentPhoto].parentElement.focus();
+    }
+
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.parentElement.addEventListener('click', () => {
+        galleryImgs = [...img.closest('.gallery-panel').querySelectorAll('.gallery-item img')];
+        showPhoto(galleryImgs.indexOf(img));
+        lightbox.classList.add('open');
+        lightbox.querySelector('.lightbox-close').focus();
+      });
+    });
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showPhoto(currentPhoto - 1));
+    lightbox.querySelector('.lightbox-next').addEventListener('click', () => showPhoto(currentPhoto + 1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPhoto(currentPhoto - 1);
+      if (e.key === 'ArrowRight') showPhoto(currentPhoto + 1);
+    });
   </script>
 </body>
 </html>
